@@ -59,22 +59,33 @@
 						<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3 align="center">PERSISTENCE OF VISION DISPLAY</h3>
-									
+									<h3 align="center">PERSISTENCE OF VISION DISPLAY</h3></br>
 									<!-- WRITE YOUR POST HERE-->
 									Display technologies are breaking records these days. 4K is a thing of the past and data compression is a thriving research topic all around the world. While being in the VLSI industry limits your exposure to embedded systems, old habits die hard. I was able to get my hands on Texas Instrument's Stellaris evaluation board and i'd been fiddling with it for some time looking for something exciting to implement, and then I found rotating displays. My colleague and fellow enthusiast, Isha and I both decided we would give it a shot</br>
 
-									</br>Rotating LED displays have been around for a long time. The concept is simple - LEDs flash in a time bound manner, and they rotated to create persistence of vision. When a person sees an object, its image remains in the retina of the eye for a time interval of 1/16th of a second. The timely blinking of the LEDs and the fast rotation overlaps the subsequent blinks to create a coherent image. There are image processing software available that take in an image and convert the Pixels (x,y) into polar co-ordinates and can pretty much display anything using some RGB LEDs and a powerful enough micro controller. I chose a much simpler approach (in the interest of time and cost effectiveness).</br>
-
-									</br>My setup was minimal, I used a general PCB and soldered LEDs on it and harnessed this assembly over a CPU fan (generally a DC motor with RPM>800 is a good way to go). The processor was an Atmega8 microcontroller driven by 2 3V button batteries passed through a voltage controller circuit. Our assembly was not robust and suffered from vibrations and loose parts, though the code worked pretty well. We were able to get some visually satisfying results. The whole assembly looked like this: 
-
-
-									The coding strategy: One rotation of the LED arm was divided into different sections according to the RPM of the motor we used.</br></br></br>
-									<img src="posts/POV illustration.jpg" alt="" align="center" />
+									</br>Rotating LED displays have been around for a long time. The concept is simple - LEDs flash in a time bound manner, and they rotated to create persistence of vision. When a person sees an object, its image remains in the retina of the eye for a time interval of 1/16th of a second. The timely blinking of the LEDs and the fast rotation overlaps the subsequent blinks to create a coherent image. There are image processing software available that take in an image and convert the Pixels (x,y) into polar co-ordinates and can pretty much display anything using some RGB LEDs and a powerful enough micro controller. I chose a much simpler approach (in the interest of time and cost effectiveness).</br></br></br>
 									
+									<video width="640" height="480" controls>
+									<source src="posts/povvideonosound.mp4" type="video/mp4" align="middle">
+									
+									Your browser does not support the video tag.
+									</video>
+
+									</br></br></br>My setup was minimal, I used a general PCB and soldered LEDs on it and harnessed this assembly over a CPU fan (generally a DC motor with RPM>800 is a good way to go). In the video, the flicker is due to the difference in the recording frequency of my phone camera and the frequency with which the LEDs blink. The processor was an Atmega8 microcontroller driven by 2 3V button batteries passed through a voltage controller circuit. Our assembly was not robust and suffered from vibrations and loose parts, though the code worked pretty well. We were able to get some visually satisfying results. The whole assembly looked like this: </br>
+
+
+									</br>The coding strategy: One rotation of the LED arm was divided into different sections according to the RPM of the motor we used. </br></br></br>
+									<center><img src="posts/POV illustration.jpg" alt="" align="middle" /></center>
+									</br></br></br>
+									
+									The yellow grid shown above has boxes which represent all the possible positions of the LEDs (a total of 9 LEDs, arranged vertically one below the previous). The columns represent how LEDs travel through time (the number of columns are decided according to the radius of the circle that the LED rotates in. Basically the circumference divided by the width of the LED, which in our case was 3mm). Each row represents the position of LED-1 at different times, starting from time t=0. The real rotating this is exactly this, except this is an "unrolled" representation of the circle the LEDs would form while rotating.</br>
+									
+									</br>The Word "HI" is printed by appying delays to the LEDs and generating a scheme in which they light up. (time starts from t=0) LED-1 is lit up at time t=3, t=7, t=11 and this strategy is applied to every LED below it, with its individual scheme of delay. One time delay is calculated according to the RPM. The time taken to complete one circle divided by total number of sections on the grid shown above gives one time delay.  
+									
+									This scheme is particularly simple to encode on a microprocessor for "text" displays. USB fan clocks is a recent product in the market which uses this technique, but the real benefit of this technique is in generating low cost, low power neon ad billboards, which is possible provided the assembly is robust enough. If this interests you, and you wish to know the details regarding Atmega8, i'll be happy to help.  
 															
 									<!-- END YOUR POST HERE-->
-									<p align="center">Keywords: Atmega8, RGB LED, persistence of vision, Arduino, frequency, signal delay</p>
+									</br></br></br><p align="center">Keywords: Atmega8, RGB LED, persistence of vision, Arduino, frequency, signal delay</p>
 								</div>
 							</section>
 
