@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Prakhar Sharma</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="index.html">Prakhar Sharma</a></h1>
+					<p>This webpage puts together my experience, work, hobbies<br />
+					and stuff I find interesting</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active">Home</a></li>
+						<!--li><a href="#two">Projects</a></li-->
+						<!--li><a href="#three">Posts</a></li-->
+						<li><a href="#">Resume</a></li>
+						<li><a href="identity-index.html">Contact</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<!--div class="container">
+									<header class="major">
+										<h3>Hello there!</h3>
+										<p>Welcome to my personal page</p>
+									</header>
+									<p>I am a Digital designer and embedded engineer working with the Green-IC group at the National University of Singapore(NUS) as a Research Engineer. Before that, I worked at AMD (Advanced Micro Devices) for two years where I designed circuits and maintained regression tests. I like playing basketball, writing and Music. </p>
+								</div-->
+							</section>
+
+						
+
+						<!-- Three -->
+							<section id="three">
+								<div class="container">
+									<h3 align="center">PERSISTENCE OF VISION DISPLAY</h3>
+									
+									<!-- WRITE YOUR POST HERE-->
+									Display technologies are breaking records these days. 4K is a thing of the past and data compression is a thriving research topic all around the world. While being in the VLSI industry limits your exposure to embedded systems, old habits die hard. I was able to get my hands on Texas Instrument's Stellaris evaluation board and i'd been fiddling with it for some time looking for something exciting to implement, and then I found rotating displays. My colleague and fellow enthusiast, Isha and I both decided we would give it a shot</br>
+
+									</br>Rotating LED displays have been around for a long time. The concept is simple - LEDs flash in a time bound manner, and they rotated to create persistence of vision. When a person sees an object, its image remains in the retina of the eye for a time interval of 1/16th of a second. The timely blinking of the LEDs and the fast rotation overlaps the subsequent blinks to create a coherent image. There are image processing software available that take in an image and convert the Pixels (x,y) into polar co-ordinates and can pretty much display anything using some RGB LEDs and a powerful enough micro controller. I chose a much simpler approach (in the interest of time and cost effectiveness).</br>
+
+									</br>My setup was minimal, I used a general PCB and soldered LEDs on it and harnessed this assembly over a CPU fan (generally a DC motor with RPM>800 is a good way to go). The processor was an Atmega8 microcontroller driven by 2 3V button batteries passed through a voltage controller circuit. Our assembly was not robust and suffered from vibrations and loose parts, though the code worked pretty well. We were able to get some visually satisfying results. The whole assembly looked like this: 
+
+
+									The coding strategy: One rotation of the LED arm was divided into different sections according to the RPM of the motor we used.</br>
+									
+															
+									<!-- END YOUR POST HERE-->
+									<p align="center">Keywords: Atmega8, RGB LED, persistence of vision, Arduino, frequency, signal delay</p>
+								</div>
+							</section>
+
+					</div>
+
+				
+					
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollzer.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
