@@ -61,28 +61,77 @@
 								<div class="container">
 									<h3 align="center">PERSISTENCE OF VISION DISPLAY</h3></br>
 									<!-- WRITE YOUR POST HERE-->
-									Display technologies are breaking records these days. 4K is a thing of the past and data compression is a thriving research topic all around the world. While being in the VLSI industry limits your exposure to embedded systems, old habits die hard. I was able to get my hands on Texas Instrument's Stellaris evaluation board and i'd been fiddling with it for some time looking for something exciting to implement, and then I found rotating displays. My colleague and fellow enthusiast, Isha and I both decided we would give it a shot</br>
-
-									</br>Rotating LED displays have been around for a long time. The concept is simple - LEDs flash in a time bound manner, and they rotated to create persistence of vision. When a person sees an object, its image remains in the retina of the eye for a time interval of 1/16th of a second. The timely blinking of the LEDs and the fast rotation overlaps the subsequent blinks to create a coherent image. There are image processing software available that take in an image and convert the Pixels (x,y) into polar co-ordinates and can pretty much display anything using some RGB LEDs and a powerful enough micro controller. I chose a much simpler approach (in the interest of time and cost effectiveness).</br></br></br>
-									
-									<video width="640" height="480" controls>
-									<source src="posts/povvideonosound.mp4" type="video/mp4" align="middle">
-									
-									Your browser does not support the video tag.
-									</video>
-
-									</br></br></br>My setup was minimal, I used a general PCB and soldered LEDs on it and harnessed this assembly over a CPU fan (generally a DC motor with RPM>800 is a good way to go). In the video, the flicker is due to the difference in the recording frequency of my phone camera and the frequency with which the LEDs blink. The processor was an Atmega8 microcontroller driven by 2 3V button batteries passed through a voltage controller circuit. Our assembly was not robust and suffered from vibrations and loose parts, though the code worked pretty well. We were able to get some visually satisfying results. The whole assembly looked like this: </br>
-
-
-									</br>The coding strategy: One rotation of the LED arm was divided into different sections according to the RPM of the motor we used. </br></br></br>
-									<center><img src="posts/POV illustration.JPG" alt="" align="middle" /></center>
-									</br></br></br>
-									
-									The yellow grid shown above has boxes which represent all the possible positions of the LEDs (a total of 9 LEDs, arranged vertically one below the previous). The columns represent how LEDs travel through time (the number of columns are decided according to the radius of the circle that the LED rotates in. Basically the circumference divided by the width of the LED, which in our case was 3mm). Each row represents the position of LED-1 at different times, starting from time t=0. The real rotating this is exactly this, except this is an "unrolled" representation of the circle the LEDs would form while rotating.</br>
-									
-									</br>The Word "HI" is printed by appying delays to the LEDs and generating a scheme in which they light up. (time starts from t=0) LED-1 is lit up at time t=3, t=7, t=11 and this strategy is applied to every LED below it, with its individual scheme of delay. One time delay is calculated according to the RPM. The time taken to complete one circle divided by total number of sections on the grid shown above gives one time delay.  
-									
-									This scheme is particularly simple to encode on a microprocessor for "text" displays. USB fan clocks is a recent product in the market which uses this technique, but the real benefit of this technique is in generating low cost, low power neon ad billboards, which is possible provided the assembly is robust enough. If this interests you, and you wish to know the details regarding Atmega8, i'll be happy to help.  
+								
+								
+<p>
+    Before I dive into the topic at hand, Please remember that this tutorial is going to be fairly technical. I advise the reader to read about DNS and
+    associated systems for a better understanding of the tutorial. I, however, try to explain terms for easy readability as I go along the tutorial.
+</p>
+<p>
+    The Internet works in a complex way. The simple act of typing a URL (uniform resource locator) which takes you to a webpage has a lot going on in those
+    seconds before the said page loads. An example URL or a FQDN (fully qualified domain name) is the key text that you type out in the browser window that
+    takes you to your website. You need to register that domain name before you can run a website on it. The registration is done under ICANN via numerous
+    domain name registers available on the internet which register your domain name for a nominal price of $10 - $35 per year. The fee is deducted from your
+    credit card or paypal account (which ever mode you choose or the registrar provides). To choose a domain name is tricky – you need the right name that
+    describes your purpose on the internet and the desired top level domain, e.g. .com, .org, .net etc.
+</p>
+<p>
+    The process of accessing a website via a link is fairly simple in theory. The website is stored on your web hosting server (which is essentially a machine
+    running a software connected to the internet with a valid IP). Your website’s domain name is associated with this IP and Name Servers send queries to find
+    said IP when you type in the domain name.
+</p>
+<p>
+    A typical URL which looks like <a href="http://www.hosting.tutorial.com/root">www.hosting.tutorial.com/root</a> Consists of various components that
+    essentially dictate what happens when you press enter in the browser window after typing in the URL. The www is the authoritative webserver, hosting is the
+    sub-domain, tutorial the second level domain and com the top level domain. Each sub-domain can have (generally has) an associated name server that stores
+    the database information of the link that you typed out. Name Servers send queries to other name servers present in other domains to locate the IP address
+    of the computer on which the website or the domain name is located.
+</p>
+<p>
+    I hope that made sense till now. If not, the purpose of this tutorial, which is to make you able to point your Web Hosting Name Servers to your domain name
+    will still be fulfilled once you are through reading it so read on. From this point on I assume you have a registered domain name and have chosen a web
+    hosting service.
+</p>
+<ul>
+    <li>
+        <strong>Name Servers: </strong>
+        These are also known as DNS servers. It’s the job of your web host’s name servers to convert your domain name into the location of your website (the IP
+        address). To point your Name server to your domain name, first retrieve the name of name servers from the web host. There are generally two name
+servers (NS1 and NS2) mentioned in the official documentation of your webhost (though there may be more like 3<sup>rd</sup> 4<sup>th</sup> and 5        <sup>th</sup>). The easiest way is to send an email query to your webhost and wait for their reply but you could also go through FAQs and the official
+        documentation for the web host. Once you have the names of both (or more)of your name servers, note them down or save the email.<strong></strong>
+    </li>
+    <li>
+        <strong>Domain Registrar:</strong>
+        The next step is to log into your account created with the domain registrar while buying the domain and get to a page where they ask for name servers
+        and type out (or copy paste) the names of the name servers to the text box where it is required and that is all there is to it. There are different
+        ways to do it for different web hosts but a general overview is given below:<strong></strong>
+    </li>
+</ul>
+<p>
+    <strong> </strong>
+</p>
+<p>
+    · Look for a page that lets you edit the settings for your domains; “Domains manager” or “My Domains” might do the trick<strong></strong>
+</p>
+<p>
+    · “DNS menu” or “Name servers” edit page may be the pages that let you edit the settings of your name servers. There might be an auxiliary link that les
+    you “set it” or “change it” or the “settings menu” for name servers<strong></strong>
+</p>
+<p>
+    · Some Registrars let you work or change settings Domain by Domain. Get to the domain you want to make changes and then look for a link that hints at
+    settings of the name servers.<strong></strong>
+</p>
+<p>
+    Once you are at the form that lets you edit the settings, write the names of the Name Servers in the appropriate boxes named ‘Primary Server’ or ‘Secondary
+    Server’. There may be more and if your web host doesn’t provide them, leave them blank.
+</p>
+<p>
+    In the whole process, doubts are bound to arise for a beginner. The best way to get them cleared is to read the documentation or FAQ section as users keep
+    having problems all the time. If you are completely clueless, write to the Registrar of your Domain and ask for help but I suggest you go through the
+    documentation and material once thoroughly in case you are stuck because more often than not, they reply point to the relevant documentation available.
+</p>
+								
+								
 															
 									<!-- END YOUR POST HERE-->
 									</br></br></br><p align="center">Keywords: Atmega8, RGB LED, persistence of vision, Arduino, frequency, signal delay</p>
